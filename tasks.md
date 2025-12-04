@@ -1,0 +1,7 @@
+- [] Search for specific courses/professors on search bar
+- [] When a specific course is searched up, professors and their overall rating is shown
+- [] when a specific professor is searched up, make it like the normal ratemy website
+- [] Simple landing page about how the website functions, etc.
+- [] About page concerning what this project is about and such
+- [] FAQ section about parts of the website, updates, ownership, etc
+- [] Impl more features from [Berkeley Time](https://berkeleytime.com/)
