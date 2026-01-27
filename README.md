@@ -5,8 +5,13 @@
   - [ ] Separate between Admin Access & Student Access
 - [ ] Search Page
   - [ ] Search feature to go through specific professors/classes
-  - [ ] Per selected class, show grade distribution (A+, A, A-, etc) or [A, B, C, D, F]
+  - [ ] Per selected class, show grade distribution [A, B, C, D, F]
   - [ ] Specific ratings per professor from AOC students
+  
+### Tech Stack
+- [ ] Frontend: Tailwind, Next, UI Plugins
+- [ ] Backend: Firebase/Mongo? Redis
+### Pitch to AOC
 - [ ] Course Scheduler for AOC (use COCs API/Scrape) for Grijalva to use for online tracking
   - [ ] Create multiple different schedules saved as tabs
   - [ ] Add in specific COC + AOC courses scheduled to take
