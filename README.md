@@ -14,7 +14,7 @@
   
 ### Tech Stack
 - [ ] Frontend: Tailwind, Next, UI Plugins
-- [ ] Backend: Firebase/Mongo? Redis
+- [ ] Backend: Firebase, Redis Caching
 ### Pitch to AOC
 - [ ] Course Scheduler for AOC (use COCs API/Scrape) for Grijalva to use for online tracking
   - [ ] Create multiple different schedules saved as tabs
