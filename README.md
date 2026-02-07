@@ -1,7 +1,7 @@
 ## Task List
 - [ ] Landing Page
 - [ ] Team page
-- [ ] Authentication Page (keep track of every signed up user)
+- [x] Authentication Page (keep track of every signed up user)
   - [ ] Separate between Admin Access & Student Access
 - [ ] Search Page
   - [ ] Search feature to go through specific professors/classes
