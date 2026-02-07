@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { HOME_ROUTE, ROOT_ROUTE, SESSION_COOKIE_NAME } from "@/constants/constants";
+import { LOGIN_ROUTE, ROOT_ROUTE, SESSION_COOKIE_NAME } from "@/constants/constants";
 
 const createSession = async (uid: string) => {
     (await cookies()).set(SESSION_COOKIE_NAME, uid, {
@@ -13,7 +13,8 @@ const createSession = async (uid: string) => {
         path: ROOT_ROUTE
     });
 
-    redirect(HOME_ROUTE);
+    // redirect(LOGIN_ROUTE);
+    redirect("/");
 }
 
 const removeSession = async () => {

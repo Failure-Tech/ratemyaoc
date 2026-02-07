@@ -4,7 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { type User } from 'firebase/auth';
 import { auth } from '@/utils/firebase/firebaseConfig';
 
-export function useUserSession(InitSession: string | null) {
+export const useUserSession = (InitSession: string | null) => {
   const [userUid, setUserUid] = useState<string | null>(InitSession);
 
   useEffect(() => {

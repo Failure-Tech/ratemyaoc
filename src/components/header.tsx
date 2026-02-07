@@ -3,15 +3,19 @@
 import { useUserSession } from "@/app/hooks/useUserSession";
 import { signInWithGoogle, signOutWithGoogle } from "@/utils/firebase/auth";
 import { createSession, removeSession } from "@/actions/authAction";
+import { useRouter } from "next/navigation";
 
 const Header = ({session}: { session: string | null }) => {
     const userSessionId = useUserSession(session);
+    const router = useRouter();
 
     const handleSignIn = async () => {
         const userUid = await signInWithGoogle();
         if (userUid) {
             await createSession(userUid);
+            router.push("/");    
         }
+
     }
 
     const handleSignOut = async () => {
@@ -22,7 +26,9 @@ const Header = ({session}: { session: string | null }) => {
     if (!userSessionId) {
         return (
             <header>
-                <button onClick={handleSignIn}>Sign In</button>
+                <button onClick={() => {
+                    handleSignIn()
+                }}>Sign In</button>
             </header>
         )
     }

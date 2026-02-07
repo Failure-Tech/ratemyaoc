@@ -1,7 +1,13 @@
-const Login = () => {
+import Header from "@/components/header";
+import { cookies } from "next/headers";
+import { SESSION_COOKIE_NAME } from "@/constants/constants";
+
+const Login = async () => {
+    const session = (await cookies()).get(SESSION_COOKIE_NAME)?.value || null;    
+
     return (
         <>
-            <h1>tyupe shit</h1>
+            <Header session={session} />
         </>
     )
 }
