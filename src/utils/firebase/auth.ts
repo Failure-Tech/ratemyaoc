@@ -2,7 +2,8 @@ import {
     type User,
     GoogleAuthProvider,
     signInWithPopup,
-    onAuthStateChanged as _onAuthStateChanged
+    onAuthStateChanged as _onAuthStateChanged,
+    signInWithEmailAndPassword
 } from "firebase/auth";
 
 import { auth } from "@/utils/firebase/firebaseConfig";
@@ -24,7 +25,7 @@ const signInWithGoogle = async () => {
         return result.user.uid;
     }
     catch (error) {
-        console.error("SPeciifc error singing in withi google", error);
+        console.error("Specific error singing in withi google", error);
     }
 }
 
@@ -38,4 +39,25 @@ const signOutWithGoogle = async () => {
     }
 }
 
-export {onAuthStateChanged, signInWithGoogle, signOutWithGoogle};
+const signInWithEmail = async (email: string, password: string) => {
+    try {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                if (!user) {
+                    console.error("password no worky worky");
+                }
+                console.log("email:", user.email)
+                return user.uid;
+            })
+            .catch((error) => {
+                console.error("Sign in w/ email & password error", error);
+            })
+        return "";
+    }
+    catch (error) {
+        console.log("Error signing in with google", error);
+    }
+}
+
+export {onAuthStateChanged, signInWithGoogle, signOutWithGoogle, signInWithEmail};

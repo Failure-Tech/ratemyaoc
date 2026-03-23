@@ -1,0 +1,212 @@
+
+
+
+
+
+
+    <div class="container-fluid page-nav-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                                                                                                                                                                                                                                                                                
+            <ul class="sm sm-mint" id="subnav" data-smartmenus-id="17737992943389263">
+                                            <li>
+                                                             
+        
+            
+        
+            <a href="/academics/justice/programs/index.php" class="has-submenu" id="sm-17737992943389263-1" aria-haspopup="true" aria-controls="subnav" aria-expanded="false">Programs<span class="sub-arrow"></span></a>
+    
+                                                                                                                                                                                                                                                                            
+            <ul class="sm sm-mint" id="subnav" role="group" aria-hidden="true" aria-labelledby="sm-17737992943389263-1" aria-expanded="false">
+                                            <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/programs/overview.php">Criminal Justice Overview</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/programs/degree.php">Administration of Justice AS Degree</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/programs/transfer.php">Administration of Justice AS for Transfer</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/programs/law-enforcement-technology-as-degree.php">Law Enforcement Technology AS Degree</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/schools/ppl/crimeandntelligenceanalysis.php">Crime and Intelligence Analysis</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/schools/ppl/physicalfitnesspreparationforpublicsafety.php">Physical Fitness Preparation for Public Safety</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/programs/course-descriptions.php">Course Descriptions</a>
+                                </li>
+                            </ul>
+                                            
+                                    </li>
+                                                <li>
+                                                             
+        
+            
+        
+            <a href="/academics/justice/information/index.php" class="has-submenu" id="sm-17737992943389263-2" aria-haspopup="true" aria-controls="subnav" aria-expanded="false">Information<span class="sub-arrow"></span></a>
+    
+                                                                                                            
+            <ul class="sm sm-mint" id="subnav" role="group" aria-hidden="true" aria-labelledby="sm-17737992943389263-2" aria-expanded="false">
+                                            <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/information/faq.php">FAQs</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/information/helpful-links.php">Helpful Links</a>
+                                </li>
+                            </ul>
+                                            
+                                    </li>
+                                                <li>
+                                                             
+        
+            
+        
+            <a href="/academics/justice/about/index.php" class="has-submenu" id="sm-17737992943389263-3" aria-haspopup="true" aria-controls="subnav" aria-expanded="false">About Us<span class="sub-arrow"></span></a>
+    
+                                                                                                                                            
+            <ul class="sm sm-mint" id="subnav" role="group" aria-hidden="true" aria-labelledby="sm-17737992943389263-3" aria-expanded="false">
+                                            <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/about/faculty.php">Faculty</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/about/distinguished-students.php">Distinguished Students</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/about/advisory.php">Advisory Board</a>
+                                </li>
+                            </ul>
+                                            
+                                    </li>
+                                                <li>
+                                                             
+        
+            
+        
+            <a href="/academics/justice/rap-sheet/index.php">The Rap Sheet</a>
+    
+                                            
+                                    </li>
+                                                <li>
+                                                             
+        
+            
+        
+            <a href="/academics/justice/collective/index.php" class="has-submenu" id="sm-17737992943389263-4" aria-haspopup="true" aria-controls="subnav" aria-expanded="false">The Collective<span class="sub-arrow"></span></a>
+    
+                                                                                                            
+            <ul class="sm sm-mint" id="subnav" role="group" aria-hidden="true" aria-labelledby="sm-17737992943389263-4" aria-expanded="false">
+                                            <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/collective/faqs.php">FAQs</a>
+                                </li>
+                                                <li>
+                                                            
+        
+            
+            
+        
+            <a href="/academics/justice/collective/topics.php">Topics</a>
+                                </li>
+                            </ul>
+                                            
+                                    </li>
+                                                <li>
+                                                             
+        
+            
+        
+            <a href="/academics/justice/career-tree/index.php">Career Tree</a>
+    
+                                            
+                                    </li>
+                                                
+                            <li><a href="#" class="has-submenu" id="sm-17737992943389263-5" aria-haspopup="true" aria-controls="sm-17737992943389263-6" aria-expanded="false">More <span class="caret"></span><span class="sub-arrow"></span></a><ul class="dropdown-menu" id="sm-17737992943389263-6" role="group" aria-hidden="true" aria-labelledby="sm-17737992943389263-5" aria-expanded="false">
+                                            
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                <li>
+                                                             
+        
+            
+        
+            <a href="/academics/justice/contact/index.php">Contact Us</a>
+    
+                                            
+                                    </li>
+                            </ul></li></ul>
+                    </div>
+            </div>
+        </div>    
+    </div>    

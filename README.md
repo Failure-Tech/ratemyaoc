@@ -4,10 +4,13 @@
 - [x] Authentication Page (keep track of every signed up user)
   - [ ] Separate between Admin Access & Student Access
 - [ ] Search Page
-  - [ ] Search feature to go through specific professors/classes
-  - [ ] Per selected class, show grade distribution [A, B, C, D, F]
+  - [ ] Scrape agent for gaining access to all faculty per department
+  - [ ] Search feature to go through specific professors
+  - [ ] (Later) Search feature to go through specific classes
+    - [ ] Per selected class, show grade distribution [A, B, C, D, F]
   - [ ] Specific ratings per professor from AOC students
-- [ ] Course Catalog
+  - [ ] Page for students to pick professor/class and choose rating + 
+- [ ] Course Catalog (setup server endpoint)
   - [ ] Import from COC's API directly with easy search features
     - [ ] Filters: Course, Semester, Date (M/W vs T/TH)
     - [ ] Pull up similar data to display over tabs (Overview, Ratings, Grade)
