@@ -124,15 +124,19 @@ const Search: React.FC = () => {
             <div>
                 <p>Pick a professor...</p>
                 <Select className="text-black" options={new_professor_name_list} onChange={setSelectedOption} defaultValue={selectedOption} />
-                {/* from db, get metrics regarding professor, reviews, etc with rmp tab and AOC tab, if no ratemy exists, redirect to login page if they want to make rating */}
+                {/* from db, get metrics regarding professor (calculate averages, etc) 
+                , reviews, etc with rmp tab and AOC tab, if no ratemy exists, redirect to login page if they want to make rating */}
 
                     Generate Professor Ratings
 
                     {
                         (selectedOption!==null) ? (
                             <>
-                                <p>{fetchRating?.id}</p>
-                                {console.log(fetchRating)}
+                                {/* run an average on it \\ save in db */}
+                                <p>Review from {fetchRating?.data.aoc.reviews.name}</p>
+                                <p>Rating: {fetchRating?.data.aoc.rating}</p>
+                                <p>Review: {fetchRating?.data.aoc.reviews.message}</p>
+                                {/* {console.log(fetchRating)} */}
                             </>
                         ) : (
                             <div>
