@@ -1,6 +1,6 @@
 ## Task List
-- [ ] Landing Page
-- [ ] Team page
+- [x] Landing Page
+- [x] About Page
 - [x] Authentication Page (keep track of every signed up user)
   - [ ] Separate between Admin Access & Student Access
 - [ ] Search Page
@@ -16,8 +16,8 @@
     - [ ] Pull up similar data to display over tabs (Overview, Ratings, Grade)
   
 ### Tech Stack
-- [ ] Frontend: Tailwind, Next, UI Plugins
-- [ ] Backend: Firebase, Redis Caching
+- Frontend: Tailwind, Next, UI Plugins
+- Backend: Firebase, Redis Caching
 ### Pitch to AOC
 - [ ] Course Scheduler for AOC (use COCs API/Scrape) for Grijalva to use for online tracking
   - [ ] Create multiple different schedules saved as tabs

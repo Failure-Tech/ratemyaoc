@@ -21,10 +21,11 @@ import { LOGIN_ROUTE } from "@/constants/constants";
 
 interface Form {
     name: string | undefined,
-    grade: string | undefined,
+    classYear: string | undefined,
     department: string | undefined,
-    courseCode: string | undefined,
+    courseCode: string,
     professorName: string | undefined,
+    grade: string | undefined,
     rating: number,
     difficulty: number,
     wouldTake: string | undefined,
@@ -54,7 +55,7 @@ const ScaleSelector = ({
                     key={n}
                     type="button"
                     onClick={() => onChange(n)}
-                    className={`flex-1 py-2.5 rounded text-sm font-bold transition-all duration-150 border ${
+                    className={`flex-1 py-2.5 rounded text-sm font-bold transition-all duration-150 border hover:cursor-pointer ${
                         value === n
                             ? "bg-[#8B1A1A] border-[#8B1A1A] text-white shadow-lg shadow-[#8B1A1A]/20"
                             : "bg-white/5 border-white/10 text-white/40 hover:border-white/30 hover:text-white/70"
@@ -71,14 +72,55 @@ const ScaleSelector = ({
     </div>
 );
 
+const GradeScaleSelector = ({
+    label,
+    value,
+    onChange,
+    lowLabel,
+    highLabel,
+}: {
+    label: string | undefined;
+    value: string | undefined;
+    onChange: (v: string) => void;
+    lowLabel: string;
+    highLabel: string;
+}) => (
+    <div className="flex flex-col gap-2">
+        <label className="text-xs font-semibold tracking-widest uppercase text-white/50">
+            {label}
+        </label>
+        <div className="flex gap-2">
+            {["A", "B", "C", "D", "F"].map((g) => (
+                <button
+                    key={g}
+                    type="button"
+                    onClick={() => onChange(g)}
+                    className={`flex-1 py-2.5 rounded text-sm font-bold transition-all duration-150 border hover:cursor-pointer ${
+                        value === g
+                            ? "bg-[#8B1A1A] border-[#8B1A1A] text-white shadow-lg shadow-[#8B1A1A]/20"
+                            : "bg-white/5 border-white/10 text-white/40 hover:border-white/30 hover:text-white/70"
+                    }`}
+                >
+                    {g}
+                </button>
+            ))}
+        </div>
+        <div className="flex justify-between text-[10px] text-white/30 px-0.5">
+            <span>{lowLabel}</span>
+            <span>{highLabel}</span>
+        </div>
+    </div>
+);
+
 const Form: React.FC = () => {
 
     // interface children with all captured form elements
     const [name, setName] = useState<Form["name"]>("");
-    const [grade, setGrade] = useState<Form["grade"]>("");
+    const [classYear, setClassYear] = useState<Form["classYear"]>("");
     const [department, setDepartment] = useState<Form["department"]>("");
     const [courseCode, setCourseCode] = useState<Form["courseCode"]>("");
     const [professorName, setProfessorName] = useState<Form["professorName"]>();
+    const [grade, setGrade] = useState<Form["grade"]>();
     const [rating, setProfessorRating] = useState<Form["rating"]>(0);
     const [difficulty, setDifficulty] = useState<Form["difficulty"]>(0);
     const [wouldTake, setWouldTake] = useState<Form["wouldTake"]>("");
@@ -103,10 +145,11 @@ const Form: React.FC = () => {
 
         const formData: Form = {
             name,
-            grade,
+            classYear,
             department,
             courseCode,
             professorName,
+            grade,
             rating,
             difficulty,
             wouldTake,
@@ -115,6 +158,7 @@ const Form: React.FC = () => {
         try {
             await addDoc(collection(firestore, "data"), formData);
             alert("Review successfully saved");
+            location.reload();
 
         } catch (error) {
             console.log("Error submitting document" + error);
@@ -178,8 +222,8 @@ const Form: React.FC = () => {
                                 <label className={labelClass}>Class Year</label>
                                 <div className="relative">
                                     <select
-                                        value={grade}
-                                        onChange={(e) => setGrade(e.target.value)}
+                                        value={classYear}
+                                        onChange={(e) => setClassYear(e.target.value)}
                                         className={selectClass}
                                     >
                                         <option value="">Select...</option>
@@ -215,7 +259,7 @@ const Form: React.FC = () => {
                                 <label className={labelClass}>Course Code</label>
                                 <input
                                     type="text"
-                                    placeholder="e.g. CS101"
+                                    placeholder="e.g. Math-211"
                                     value={courseCode}
                                     onChange={(e) => setCourseCode(e.target.value)}
                                     className={inputClass}
@@ -238,6 +282,14 @@ const Form: React.FC = () => {
                             <p className="text-[10px] tracking-widest uppercase text-white/30 font-semibold border-b border-white/8 pb-3">
                                 Your Rating
                             </p>
+
+                            <GradeScaleSelector 
+                                label="Grade (A-F)"
+                                value={grade}
+                                onChange={setGrade}
+                                lowLabel="Excelled"
+                                highLabel="Failed"
+                            />
 
                             <ScaleSelector
                                 label="Rating (1–5)"
@@ -263,7 +315,7 @@ const Form: React.FC = () => {
                                             key={val}
                                             type="button"
                                             onClick={() => setWouldTake(val)}
-                                            className={`flex-1 py-2.5 rounded text-sm font-bold capitalize transition-all duration-150 border ${
+                                            className={`hover:cursor-pointer flex-1 py-2.5 rounded text-sm font-bold capitalize transition-all duration-150 border ${
                                                 wouldTake === val
                                                     ? "bg-[#8B1A1A] border-[#8B1A1A] text-white shadow-lg shadow-[#8B1A1A]/20"
                                                     : "bg-white/5 border-white/10 text-white/40 hover:border-white/30 hover:text-white/70"
@@ -289,7 +341,7 @@ const Form: React.FC = () => {
 
                         <button
                             type="submit"
-                            className="w-full py-3 rounded text-sm font-bold text-white tracking-wide transition-all duration-150 hover:brightness-110 active:scale-[0.98]"
+                            className="hover: cursor-pointer w-full py-3 rounded text-sm font-bold text-white tracking-wide transition-all duration-150 hover:brightness-110 active:scale-[0.98]"
                             style={{ backgroundColor: "#8B1A1A" }}
                         >
                             Submit Review
@@ -303,14 +355,14 @@ const Form: React.FC = () => {
             </div>
         ) : (
             <div
-                className="min-h-screen flex flex-col items-center justify-center gap-4 px-6"
+                className="min-h-screen flex flex-col items-center justify-center gap-4 px-6 "
                 style={{ backgroundColor: "rgb(28, 48, 89)" }}
             >
                 <div className="fixed top-0 left-0 w-full h-1 bg-[#8B1A1A]" />
                 <p className="text-white/60 text-sm">You need to be logged in to view this page.</p>
                 <button
                     onClick={() => router.push(LOGIN_ROUTE)}
-                    className="px-6 py-2.5 rounded text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-95"
+                    className="px-6 py-2.5 rounded text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-95 hover:cursor-pointer"
                     style={{ backgroundColor: "#8B1A1A" }}
                 >
                     Go to Login

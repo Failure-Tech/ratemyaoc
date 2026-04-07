@@ -65,7 +65,7 @@ const Header = ({session}: { session: string | null }) => {
                 </div>
 
                 {/* Card */}
-                <div className="bg-white/[0.04] border border-white/8 rounded-xl p-6 flex flex-col gap-5">
+                <div className="bg-white/4 border border-white/8 rounded-xl p-6 flex flex-col gap-5">
 
                     {/* Google sign in */}
                     <header>

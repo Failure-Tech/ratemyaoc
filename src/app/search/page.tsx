@@ -16,7 +16,7 @@ const Search: React.FC = () => {
 
     const [fetchRating, setFetchRating] = useState<{id: string, data: DocumentData} | null>(null);
     const db = firestore;
-    const collectionName = "wrd";
+    const collectionName = "data";
     const documentId = "wrd";
 
 
@@ -38,9 +38,13 @@ const Search: React.FC = () => {
                     }
                 ])
             }
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            catch(error: any) {
-                console.log(error?.message);
+            catch (error: unknown) {
+                if (error instanceof Error) {
+                    console.log(error?.message);
+                }
+                else {
+                    console.log("Unexpected Error: \n", error);
+                }
             }            
         }
 
