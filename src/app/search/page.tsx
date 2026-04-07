@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
 import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { firestore } from "@/utils/firebase/firebaseConfig";
@@ -115,12 +114,6 @@ const Search: React.FC = () => {
 
     return (
         <>
-            <Image 
-                src="/aoc_assets/search_bg.jpg"
-                alt="search page background"
-                width={500}
-                height={500}
-            />
             <div>
                 <p>Pick a professor...</p>
                 <Select className="text-black" options={new_professor_name_list} onChange={setSelectedOption} defaultValue={selectedOption} />
