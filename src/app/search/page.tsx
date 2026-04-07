@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { firestore } from "@/utils/firebase/firebaseConfig";
 import Select from "react-select";
+
 interface Professor {
     department: string,
     professor_name: string,
