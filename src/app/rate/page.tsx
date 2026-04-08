@@ -29,7 +29,8 @@ interface Form {
     rating: number,
     difficulty: number,
     wouldTake: string | undefined,
-    review: string | undefined
+    review: string | undefined,
+    date: Date | undefined
 }
 
 const ScaleSelector = ({
@@ -129,6 +130,8 @@ const Form: React.FC = () => {
     // user auth
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
 
+    const date: Date = new Date();
+
     const router = useRouter();
 
     useEffect(() => {
@@ -154,6 +157,7 @@ const Form: React.FC = () => {
             difficulty,
             wouldTake,
             review,
+            date
         }
         try {
             await addDoc(collection(firestore, "data"), formData);
@@ -338,6 +342,7 @@ const Form: React.FC = () => {
                                 />
                             </div>
                         </div>
+
 
                         <button
                             type="submit"
