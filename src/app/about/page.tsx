@@ -1,20 +1,24 @@
+import Image from "next/image";
 import React from "react";
 
 const contributors = [
     {
         name: "Gautham Korrapati",
-        role: "Role / 2027",
-        bio: "Short blurb about this person's contribution to the project goes here.",
+        role: "Website Developer / 2027",
+        profile_picture: "/team/gautham",
+        bio: "Replace About Me content",
     },
     {
         name: "Ishan Vaish",
-        role: "Role / 2027",
-        bio: "Short blurb about this person's contribution to the project goes here.",
+        role: "Marketer / 2027",
+        profile_picture: "/team/ishan.jpg",
+        bio: "Replace About Me content",
     },
     {
         name: "Avantika Jangeesh",
-        role: "Role / 2027",
-        bio: "Short blurb about this person's contribution to the project goes here.",
+        role: "Marketer / 2027",
+        profile_picture: "/team/avantika.jpeg",
+        bio: "Hello, I am Avantika Jangeesh, a current Junior at the Academy of the Canyons and a dual enrollment student at College of the Canyons. I love computer science and math, and using them to help solve problems in our community. Outside of academics, I also enjoy art and reading!",
     },
 ];
 
@@ -110,7 +114,13 @@ const About: React.FC = () => {
                             >
                                 {/* Avatar placeholder */}
                                 <div className="w-20 h-20 rounded-full bg-white/8 border border-white/10 flex items-center justify-center text-white/20 text-xs tracking-wide">
-                                    Photo
+                                    <Image
+                                        src={person.profile_picture}
+                                        alt="lksdjfldskf"
+                                        className="w-20 h-20 rounded-full bg-white/8 border border-white/10 flex items-center justify-center text-white/20 text-xs tracking-wide"
+                                        width={100}
+                                        height={100}
+                                    />
                                 </div>
                                 <div className="flex flex-col gap-0.5">
                                     <span className="text-white text-sm font-bold">{person.name}</span>
