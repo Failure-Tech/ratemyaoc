@@ -9,7 +9,9 @@ const rateMyProfessor = async (professor: string | undefined) => {
         rmp_instance.set_professor_name(professor);
     }
     const specific_prof = await rmp_instance.get_comments_by_professor();
-    console.log(specific_prof);
+    // console.log(specific_prof);
+
+    return specific_prof;
 }
 
 export default rateMyProfessor;

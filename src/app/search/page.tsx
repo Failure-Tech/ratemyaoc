@@ -6,6 +6,7 @@ import { firestore } from "@/utils/firebase/firebaseConfig";
 import Select from "react-select";
 
 import rateMyProfessor from "@/app/search/rateMyProfessor";
+import { TeacherRatings } from "rate-my-professor-api-ts";
 
 interface Professor {
     department: string,
@@ -13,9 +14,29 @@ interface Professor {
     email: string
 }
 
+// interface RateMyProfessorReview {
+//     class: string,
+//     comment: string,
+//     difficulty_rating: number,
+//     teacher_id: string,
+//     clarity_rating: number,
+//     student_grade: string,
+//     is_for_credit: boolean,
+//     attendance_status: string,
+//     is_online: boolean,
+//     comments_like: number,
+//     comments_dislikes: number,
+//     rating_tags: string,
+//     textbook_use: number,
+//     would_take_again: boolean
+// }
+
 const Search: React.FC = () => {
     const [professorList, setProfessorList] = useState<Professor[]>([]);
     const [selectedOption, setSelectedOption] = useState<{value: string, label: string} | null>(null);
+
+    // implement redis caching for rmp reviews on same prof
+    const [rmpReviews, setRmpReviews] = useState<TeacherRatings[]>();
 
     const [fetchRating, setFetchRating] = useState<{id: string, data: DocumentData} | null>(null);
     const db = firestore;
@@ -73,16 +94,32 @@ const Search: React.FC = () => {
                 }
         }
 
+        const setRateMyProfReviews = async () => {
+            try {
+                await setRmpReviews(await rateMyProfessor(selectedOption?.label));
+            }
+            catch (error) {
+                console.error("Error fetchign reviews: ", error);
+            }
+        }
+
         // need to do in async way for async methods
         const setAllData = async () => {
             await setProfessors();
             await fetchDocument();
+
+            if (selectedOption) {
+                await setRateMyProfReviews();
+            }
         }
+
+        // if (selectedOption) {
+        // }
 
         setAllData();
 
         // remove selectedOption?.value
-    }, [db]);
+    }, [selectedOption, db]);
 
     
     const new_professor_name_list = useMemo(
@@ -143,7 +180,6 @@ const Search: React.FC = () => {
                                 <p>Rating: {fetchRating?.data.aoc.rating}</p>
                                 <p>Review: {fetchRating?.data.aoc.reviews.message}</p>
                                 {/* {console.log(fetchRating)} */}
-                                {rateMyProfessor(selectedOption?.label)}
                             </>
                         ) : (
                             <div>
@@ -151,7 +187,20 @@ const Search: React.FC = () => {
                             </div>
                         )
                     }
-                    
+
+                    {
+                        (rmpReviews !== null) ? (
+                            <>
+                                <div>
+                                    {
+                                        <p>Review from {rmpReviews?.[1]?.comment}</p>
+                                    }
+                                </div>
+                            </>
+                        ) : (
+                            <></>
+                        )
+                    }
             </div>
         </>
     )
