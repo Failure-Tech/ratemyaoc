@@ -5,6 +5,8 @@ import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { firestore } from "@/utils/firebase/firebaseConfig";
 import Select from "react-select";
 
+import rateMyProfessor from "@/app/search/rateMyProfessor";
+
 interface Professor {
     department: string,
     professor_name: string,
@@ -36,6 +38,11 @@ const Search: React.FC = () => {
                         department: "yippe",
                         professor_name: "wrd",
                         email: "hehe"
+                    },
+                    {
+                        department: "mathematics",
+                        professor_name: "Brent Riffel",
+                        email: "shi"
                     }
                 ])
             }
@@ -64,16 +71,17 @@ const Search: React.FC = () => {
                 } catch (error) {
                     console.error("Error fetching document: ", error);
                 }
-            }
+        }
 
-            // need to do in async way for async methods
-            const setAllData = async () => {
-                await setProfessors();
-                await fetchDocument();
-            }
+        // need to do in async way for async methods
+        const setAllData = async () => {
+            await setProfessors();
+            await fetchDocument();
+        }
 
-            setAllData();
+        setAllData();
 
+        // remove selectedOption?.value
     }, [db]);
 
     
@@ -135,6 +143,7 @@ const Search: React.FC = () => {
                                 <p>Rating: {fetchRating?.data.aoc.rating}</p>
                                 <p>Review: {fetchRating?.data.aoc.reviews.message}</p>
                                 {/* {console.log(fetchRating)} */}
+                                {rateMyProfessor(selectedOption?.label)}
                             </>
                         ) : (
                             <div>
