@@ -19,6 +19,7 @@ const Home = () => {
         <div className="w-full overflow-hidden rounded-xl border border-white/8 shadow-2xl shadow-black/40">
           <Image
             src="/aoc_assets/search_bg.jpg"
+            loading="eager"
             alt="AOC campus"
             width={800}
             height={340}

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { doc, DocumentData, getDoc } from "firebase/firestore";
+import { collection, doc, DocumentData, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { firestore } from "@/utils/firebase/firebaseConfig";
 import Select from "react-select";
 
@@ -14,23 +14,6 @@ interface Professor {
     email: string
 }
 
-// interface RateMyProfessorReview {
-//     class: string,
-//     comment: string,
-//     difficulty_rating: number,
-//     teacher_id: string,
-//     clarity_rating: number,
-//     student_grade: string,
-//     is_for_credit: boolean,
-//     attendance_status: string,
-//     is_online: boolean,
-//     comments_like: number,
-//     comments_dislikes: number,
-//     rating_tags: string,
-//     textbook_use: number,
-//     would_take_again: boolean
-// }
-
 const Search: React.FC = () => {
     const [professorList, setProfessorList] = useState<Professor[]>([]);
     const [selectedOption, setSelectedOption] = useState<{value: string, label: string} | null>(null);
@@ -38,12 +21,15 @@ const Search: React.FC = () => {
     // implement redis caching for rmp reviews on same prof
     const [rmpReviews, setRmpReviews] = useState<TeacherRatings[]>();
 
-    const [fetchRating, setFetchRating] = useState<{id: string, data: DocumentData} | null>(null);
+    const [fetchRating, setFetchRating] = useState<{id: string, data: DocumentData}[] | null>(null);
     const db = firestore;
+    // wrd
     const collectionName = "data";
-    const documentId = "wrd";
 
-
+    // need to make it so that we can index/search through documentIds for specific prof name given
+    // TODO: boutta be a hella inefficient algo but whtevr ill fix it later
+    // const documentId = "wrd";
+    
     // { collectionName, documentId}: {collectionName: string, documentId: string}
 
     useEffect(() => {
@@ -64,6 +50,11 @@ const Search: React.FC = () => {
                         department: "mathematics",
                         professor_name: "Brent Riffel",
                         email: "shi"
+                    },
+                    {
+                        department: "mathematics",
+                        professor_name: "Kelly Aceves",
+                        email: ""
                     }
                 ])
             }
@@ -79,16 +70,26 @@ const Search: React.FC = () => {
 
         const fetchDocument = async () => {
                 try {
-                    const docRef = doc(db, collectionName, documentId);
-                    const docSnap = await getDoc(docRef);
+                    if (selectedOption != null) {
+                        const profDocQuery = query(collection(db, collectionName), where("professorName", "==", selectedOption.label));
+                        const profDocs = await getDocs(profDocQuery);
 
-                    if (docSnap.exists()) {
-                        console.log("name CHECK: ", docSnap.data());
-                        setFetchRating({id: docSnap.id, data: docSnap.data()});
+                        if (!profDocs.empty) {
+                            const allData = profDocs.docs.map(doc => ({
+                                id: doc.id,
+                                data: doc.data()
+                            }))
+
+                            console.log("ALL DATA => ", allData);
+
+                            setFetchRating(allData);
+                        }
                     }
+
                     else {
                         setFetchRating(null);
                     }
+                    
                 } catch (error) {
                     console.error("Error fetching document: ", error);
                 }
@@ -96,7 +97,7 @@ const Search: React.FC = () => {
 
         const setRateMyProfReviews = async () => {
             try {
-                await setRmpReviews(await rateMyProfessor(selectedOption?.label));
+                setRmpReviews(await rateMyProfessor(selectedOption?.label));
             }
             catch (error) {
                 console.error("Error fetchign reviews: ", error);
@@ -113,12 +114,8 @@ const Search: React.FC = () => {
             }
         }
 
-        // if (selectedOption) {
-        // }
-
         setAllData();
 
-        // remove selectedOption?.value
     }, [selectedOption, db]);
 
     
@@ -175,11 +172,21 @@ const Search: React.FC = () => {
                     {
                         (selectedOption!==null) ? (
                             <>
-                                {/* run an average on it \\ save in db */}
-                                <p>Review from {fetchRating?.data.aoc.reviews.name}</p>
-                                <p>Rating: {fetchRating?.data.aoc.rating}</p>
-                                <p>Review: {fetchRating?.data.aoc.reviews.message}</p>
-                                {/* {console.log(fetchRating)} */}
+                                <>
+                                    {(fetchRating && fetchRating.length > 0) ? (
+                                            fetchRating.map((doc) => (
+                                                <div key={doc.id}>
+                                                    <p>Review from {doc.data.name}</p>
+                                                    <p>Rating: {doc.data.rating}</p>
+                                                    <p>Review: {doc.data.review}</p>
+                                                </div>
+                                            ))
+                                    ) : (
+                                        <>
+                                            <p>No ratemyaoc reviews for this professor</p>
+                                        </>
+                                    )}
+                                </>
                             </>
                         ) : (
                             <div>
@@ -193,7 +200,7 @@ const Search: React.FC = () => {
                             <>
                                 <div>
                                     {
-                                        <p>Review from {rmpReviews?.[1]?.comment}</p>
+                                        <p>RMP REVIEW from {rmpReviews?.[1]?.comment}</p>
                                     }
                                 </div>
                             </>
