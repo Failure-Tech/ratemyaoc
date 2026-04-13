@@ -1,23 +1,25 @@
+import os
+import sys
+
 from flask import Flask
-import RateMyProfessor_Database_APIs as rmpapi
-import json
+from flask_cors import CORS
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.insert(0, project_root)
+
+from scrape.department import find_departments
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/health")
 def health_check():
     return "<p>All Clear </p>"
 
-@app.route("/ratemyprofessor")
-def rmp():
-    ex_school_id = "13708"
-    all_profs = rmpapi.fetch_all_professors_from_a_school(ex_school_id)
-    print(f"Fetched {len(all_profs)} professors")
-
-#     with open("del.txt", "w") as f:
-#         # json.dumps(all_profs)
-#         f.write(str(all_profs))
-
+@app.route("/departments")
+def current_coc_departments():
+    return find_departments("https://www.canyons.edu/academics/")
 
 if __name__ == "__main__":
     app.run(host="localhost", port=8080)

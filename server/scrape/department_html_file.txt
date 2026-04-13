@@ -1,0 +1,109 @@
+[<div class="container-fluid page-content-container">
+<div class="container">
+<div class="row">
+<div class="col-lg-8 divider">
+<h1>Academics</h1>
+<div class="row gutter">
+<div class="col-lg-12">
+<div class="mt-4">
+<h2>Academic Departments</h2>
+<ul>
+<li><a href="/academics/justice/">Administration of Justice</a></li>
+<li><a href="/academics/anthropology/">Anthropology</a></li>
+<li><a href="/academics/architecture/">Architecture</a></li>
+<li><a href="/academics/art/">Art</a></li>
+<li><a href="/academics/artgallery/">Art Gallery</a></li>
+<li><a href="https://canyons.prestosports.com/landing/index">Athletics Department</a></li>
+<li><a href="/academics/automotive/">Automotive</a></li>
+<li><a href="/academics/biology/">Biological and Environmental Sciences</a></li>
+<li><a href="/academics/business/">Business</a></li>
+<li><a href="/academics/computerapplications/">Computer Applications &amp; Web Technologies</a></li>
+<li><a href="/academics/cna/">Certified Nursing Assistant</a></li>
+<li><a href="/academics/chemistry/">Chemistry</a></li>
+<li><a href="/academics/cinema/">Cinema</a></li>
+<li><a href="/academics/communications/">Communication Studies</a></li>
+<li><a href="/academics/communityeducation/">Community Ed</a></li>
+<li><a href="/academics/computerscience/">Computer Science</a></li>
+<li><a href="/academics/construction/">Construction Technology</a></li>
+<li><a href="/academics/culinary/">Culinary Arts</a></li>
+<li><a href="/academics/dance/">Dance</a></li>
+<li><a href="/academics/earthsciences/">Earth, Space and Environmental Sciences</a></li>
+<li><a href="/academics/ece/">Early Childhood Education</a></li>
+<li><a href="/academics/ececenter/">ECE Center</a></li>
+<li><a href="/academics/economics/">Economics</a></li>
+<li><a href="/academics/electronicsystems/">Electronic Systems</a></li>
+<li><a href="/academics/emt/">EMT</a></li>
+<li><a href="/academics/engineering/">Engineering</a></li>
+<li><a href="/academics/english/">English</a></li>
+<li><a href="/academics/esl/">ESL</a></li>
+<li><a href="/academics/ethnicstudies/index.php">Ethnic Studies</a></li>
+<li><a href="/academics/fire/">Fire Technology</a></li>
+<li><a href="/studentservices/enrollmentservices/freeclasses/index.php">Free Classes (Noncredit)</a></li>
+<li><a href="https://www.gmdcoc.org/">Graphic and Multimedia Design </a></li>
+<li><a href="/academics/health/">Health Science</a></li>
+<li><a href="/academics/history/">History</a></li>
+<li><a href="/academics/hotelrestaurant/">Hotel Restaurant</a></li>
+<li><a href="/academics/humanities/">Humanities</a></li>
+<li><a href="/academics/interiordesign/">Interior Design</a></li>
+<li><a href="/academics/schools/kinesiology/">Kinesiology and Physical Education </a></li>
+<li><a href="/academics/manufacturing/">Manufacturing Technology</a></li>
+<li><a href="/academics/mathematics/">Mathematics</a></li>
+<li><a href="/academics/mea/">Media Entertainment Arts</a></li>
+<li><a href="/academics/mlt/">Medical Laboratory Technician</a></li>
+<li><a href="/academics/languages/">Modern Languages &amp; Cultures</a></li>
+<li><a href="/academics/music/">Music</a></li>
+<li><a href="/academics/networking/">Networking</a></li>
+<li><a href="/academics/nursing/">Nursing</a></li>
+<li><a href="/academics/ota/index.php">Occupational Therapy Assistant</a></li>
+<li><a href="/academics/paralegal/">Paralegal</a></li>
+<li><a href="/academics/philosophy/">Philosophy</a></li>
+<li><a href="/academics/photography/">Photography</a></li>
+<li><a href="/academics/pta/index.php">Physical Therapist Assistant</a></li>
+<li><a href="/academics/physics/">Physics</a></li>
+<li><a href="/academics/politicalscience/">Political Science</a></li>
+<li><a href="/academics/psychology/">Psychology</a></li>
+<li><a href="/academics/realestate/">Real Estate</a></li>
+<li><a href="/academics/recreation/">Recreation Management</a></li>
+<li><a href="/academics/signlanguage/">Sign Language</a></li>
+<li><a href="/academics/sociology/">Sociology</a></li>
+<li><a href="/academics/sportsmedicine/">Sports Medicine</a></li>
+<li><a href="/academics/surveying/">Surveying</a></li>
+<li><a href="/academics/theatre/">Theatre</a></li>
+<li><a href="/academics/water/">Water</a></li>
+<li><a href="/academics/welding/">Welding</a></li>
+</ul>
+</div>
+</div> </div>
+</div>
+<div class="col-lg-4 sidebar">
+<div class="row">
+<div class="col-12 mb-4">
+<p><a href="https://canyons.programmapper.ws/academics" rel="noopener" target="_blank" title="Explore"><img alt="Program Mapper logo" class="" height="69" src="/_images/academics/LOGO-programMapper-600px.png" width="350"/></a></p>
+<p>Chart your path from start to completion with this helpful new tool.</p>
+<p style="text-align: center;"><a class="btn btn-orange" href="https://canyons.programmapper.ws/academics" rel="noopener" target="_blank">Explore</a></p>
+<p style="text-align: center;"> </p>
+<hr/>
+<h2>Related Programs</h2>
+<ul>
+<li><a href="/academics/honors/">Honors</a></li>
+<li><a href="/academics/isp/">International Services &amp; Programs</a></li>
+<li><a href="/academics/schools/learning">Learning Resources</a></li>
+<li><a href="/academics/library/">Library</a></li>
+<li><a href="/academics/mesa/">MESA</a></li>
+<li><a href="/academics/nasa/">NASA Student Engagement Program </a></li>
+<li><a href="/academics/onlineeducation/">Online Education</a></li>
+<li><a href="/academics/schools/ppl/">Personal and Professional Learning</a></li>
+<li><a href="/academics/learning/">Service Learning</a></li>
+<li><a href="/academics/tlc/">Tutoring and Learning Center</a></li>
+</ul>
+<hr/>
+<h2>Related Links</h2>
+<ul>
+<li><a href="/academics/faculty/">Faculty</a></li>
+<li><a href="/academics/schools/index.php">Schools</a></li>
+</ul>
+</div>
+</div> </div>
+</div>
+</div>
+</div>]

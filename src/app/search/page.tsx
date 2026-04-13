@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { collection, doc, DocumentData, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
-import { firestore } from "@/utils/firebase/firebaseConfig";
+import { collection, DocumentData, getDocs, query, where } from "firebase/firestore";
+import { auth, firestore } from "@/utils/firebase/firebaseConfig";
 import Select from "react-select";
 
 import rateMyProfessor from "@/app/search/rateMyProfessor";
 import { TeacherRatings } from "rate-my-professor-api-ts";
+import { onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 interface Professor {
     department: string,
@@ -26,6 +28,9 @@ const Search: React.FC = () => {
     // wrd
     const collectionName = "data";
 
+    const [userEmailTeam, setUserEmailTeam] = useState<boolean>(false);
+    const router = useRouter();
+
     // need to make it so that we can index/search through documentIds for specific prof name given
     // TODO: boutta be a hella inefficient algo but whtevr ill fix it later
     // const documentId = "wrd";
@@ -33,21 +38,27 @@ const Search: React.FC = () => {
     // { collectionName, documentId}: {collectionName: string, documentId: string}
 
     useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user?.email === "99066493@my.hartdistrict.org") {
+                setUserEmailTeam(true);
+            }
+        })
+
         const setProfessors = async () => {
             try {
                 setProfessorList([
+                    // {
+                    //     department: "type shit",
+                    //     professor_name: "shit",
+                    //     email: "type"
+                    // },
+                    // {
+                    //     department: "yippe",
+                    //     professor_name: "wrd",
+                    //     email: "hehe"
+                    // },
                     {
-                        department: "type shit",
-                        professor_name: "shit",
-                        email: "type"
-                    },
-                    {
-                        department: "yippe",
-                        professor_name: "wrd",
-                        email: "hehe"
-                    },
-                    {
-                        department: "mathematics",
+                        department: "history",
                         professor_name: "Brent Riffel",
                         email: "shi"
                     },
@@ -158,8 +169,9 @@ const Search: React.FC = () => {
     */
 
     // from professor, retrieve RMP + AOC ratemy from firestore
-
+    //
     return (
+        (userEmailTeam) ? (
         <>
             <div>
                 <p>Pick a professor...</p>
@@ -190,7 +202,7 @@ const Search: React.FC = () => {
                             </>
                         ) : (
                             <div>
-                                <p>tu madre</p>
+                                {/* <p>tu madre</p> */}
                             </div>
                         )
                     }
@@ -210,6 +222,16 @@ const Search: React.FC = () => {
                     }
             </div>
         </>
+        ) : 
+        (
+            <>
+                <div>
+                    <p>Page currently under construction</p>
+                    <p>Please revisit some other time</p>
+                    <button className="hover:cursor-pointer bg-amber-600" onClick={() => router.push("/")} >Navigate back to home page</button>
+                </div>
+            </>
+        )
     )
 }
 

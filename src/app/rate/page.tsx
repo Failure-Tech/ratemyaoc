@@ -127,6 +127,8 @@ const Form: React.FC = () => {
     const [wouldTake, setWouldTake] = useState<Form["wouldTake"]>("");
     const [review, setReview] = useState<Form["review"]>("");
 
+    const [departmentList, setDepartmentList] = useState<string[]>();
+
     // user auth
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
 
@@ -140,6 +142,22 @@ const Form: React.FC = () => {
                 setUserLoggedIn(true);
             }
         })
+
+        // fetch departments
+        const fetchDepartments = async () => {
+            try {
+                const response = await fetch("http://localhost:8080/departments")
+                const result = await response.json();
+                setDepartmentList(result);
+            }
+            catch (err) {
+                // default for now since i lazy
+                setDepartmentList(["Administration of Justice","Anthropology","Architecture","Art","Art Gallery","Athletics Department","Automotive","Biological and Environmental Sciences","Business","Computer Applications & Web Technologies","Certified Nursing Assistant","Chemistry","Cinema","Communication Studies","Community Ed","Computer Science","Construction Technology","Culinary Arts","Dance","Earth, Space and Environmental Sciences","Early Childhood Education","ECE Center","Economics","Electronic Systems","EMT","Engineering","English","ESL","Ethnic Studies","Fire Technology","Free Classes (Noncredit)","Graphic and Multimedia Design ","Health Science","History","Hotel Restaurant","Humanities","Interior Design","Kinesiology and Physical Education ","Manufacturing Technology","Mathematics","Media Entertainment Arts","Medical Laboratory Technician","Modern Languages & Cultures","Music","Networking","Nursing","Occupational Therapy Assistant","Paralegal","Philosophy","Photography","Physical Therapist Assistant","Physics","Political Science","Psychology","Real Estate","Recreation Management","Sign Language","Sociology","Sports Medicine","Surveying","Theatre","Water","Welding"]);
+                console.log(err);
+            }
+        }
+
+        fetchDepartments();
 
     }, []);
 
@@ -250,13 +268,23 @@ const Form: React.FC = () => {
 
                             <div className={fieldClass}>
                                 <label className={labelClass}>Department</label>
-                                <input
+                                {/* <input
                                     type="text"
                                     placeholder="Department..."
                                     value={department}
                                     onChange={(e) => setDepartment(e.target.value)}
                                     className={inputClass}
-                                />
+                                /> */}
+                                <select
+                                    value={department}
+                                    onChange={(e) => setDepartment(e.target.value)}
+                                    className={selectClass}
+                                >
+                                    {departmentList?.map((specificDepartment) => (
+                                        <option key={specificDepartment}>{specificDepartment}</option>
+                                    ))}
+                                </select>
+                                {}
                             </div>
 
                             <div className={fieldClass}>
