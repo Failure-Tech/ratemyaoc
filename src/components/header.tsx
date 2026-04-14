@@ -1,8 +1,8 @@
 "use client";
 
 import { useUserSession } from "@/app/hooks/useUserSession";
-import { signInWithGoogle, signOutWithGoogle, signInWithEmail } from "@/utils/firebase/auth";
-import { createSession, removeSession } from "@/actions/authAction";
+import { signInWithGoogle, signInWithEmail } from "@/utils/firebase/auth";
+import { createSession } from "@/actions/authAction";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
@@ -21,11 +21,6 @@ const Header = ({session}: { session: string | null }) => {
             router.push("/search");
         }
 
-    }
-
-    const handleGoogleSignOut = async () => {
-        await signOutWithGoogle();
-        await removeSession();
     }
 
     const handleEmailAndPasswordSignIn = async (email: string, password: string) => {

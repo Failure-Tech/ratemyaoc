@@ -16,6 +16,7 @@ const Navbar: React.FC = () => {
         { label: "Catalog",   path: "" },
         { label: "Scheduler", path: "" },
         { label: "Login",     path: "/login" },
+        { label: "Logout", path: "/logout"}
     ];
 
     const navigate = (path: string) => {
