@@ -5,14 +5,14 @@ const contributors = [
     {
         name: "Gautham Korrapati",
         role: "Website Developer / 2027",
-        profile_picture: "/team/gautham",
-        bio: "Replace About Me content",
+        profile_picture: "/team/gk_pfp.png",
+        bio: "I'm Gautham, and I'm a current junior here at AOC. I like going to the gym, playing basketball, and doing other physical activities. I'm planning to pursue an engineering degree at a 4-year university, and am currently taking the Math + Physics route at COC.",
     },
     {
         name: "Ishan Vaish",
         role: "Marketer / 2027",
-        profile_picture: "/team/ishan.jpg",
-        bio: "Replace About Me content",
+        profile_picture: "/team/ishan_pfp.jpg",
+        bio: "My name is Ishan Vaish, and I am a Junior at AOC while also being dual-enrolled at COC. Wanting to pursue engineering at a 4-year university, I have been primarily taking math and physics professors and COC and have joined many extracurriculars relating to engineering. Outside of school, I love playing violin, taking long walks, and listening to music!",
     },
     {
         name: "Avantika Jangeesh",
@@ -41,7 +41,7 @@ const About: React.FC = () => {
                         className="text-4xl font-black text-white leading-tight"
                         style={{ fontFamily: "'Georgia', serif" }}
                     >
-                        About This RateMyAOC
+                        About RateMyAOC
                     </h1>
                     <div className="flex items-center gap-3">
                         <div className="h-px w-12 bg-[#8B1A1A]" />
@@ -118,7 +118,7 @@ const About: React.FC = () => {
                                         src={person.profile_picture}
                                         alt="lksdjfldskf"
                                         className="w-20 h-20 rounded-full bg-white/8 border border-white/10 flex items-center justify-center text-white/20 text-xs tracking-wide"
-                                        width={100}
+                                        width={134}
                                         height={100}
                                     />
                                 </div>
