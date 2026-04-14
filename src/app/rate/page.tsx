@@ -6,6 +6,7 @@ import { firestore, auth } from "@/utils/firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { LOGIN_ROUTE } from "@/constants/constants";
+import redis from "@/utils/redis/redisConfig";
 
 /* 
 - your name <=> current grade (c/o '26 - c/o '29)
@@ -127,7 +128,7 @@ const Form: React.FC = () => {
     const [wouldTake, setWouldTake] = useState<Form["wouldTake"]>("");
     const [review, setReview] = useState<Form["review"]>("");
 
-    const [departmentList, setDepartmentList] = useState<string[]>();
+    const [departmentList, setDepartmentList] = useState<string[] | null>();
 
     // user auth
     const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
@@ -146,9 +147,18 @@ const Form: React.FC = () => {
         // fetch departments
         const fetchDepartments = async () => {
             try {
-                const response = await fetch("http://localhost:8080/departments")
-                const result = await response.json();
-                setDepartmentList(result);
+                const cachedDepartments: string[] | null = await redis.get("departments");
+                if (cachedDepartments) {
+                    setDepartmentList(cachedDepartments);
+                    console.log("used cached value")
+                }
+                else {
+                    const response = await fetch("http://localhost:8080/departments")
+                    const result = await response.json();
+                    await redis.set("departments", result);
+                    setDepartmentList(result);
+                    console.log("sent request to api")
+                }
             }
             catch (err) {
                 // default for now since i lazy
