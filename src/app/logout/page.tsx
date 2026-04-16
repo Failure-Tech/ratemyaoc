@@ -49,7 +49,7 @@ const Logout: React.FC = () => {
                     </p>
                 </div>
 
-                <div className="bg-white/[0.04] border border-white/8 rounded-xl p-6 w-full flex flex-col gap-4">
+                <div className="bg-white/4 border border-white/8 rounded-xl p-6 w-full flex flex-col gap-4">
                     <p className="text-white/50 text-sm">
                         Are you sure you want to sign out of your account?
                     </p>

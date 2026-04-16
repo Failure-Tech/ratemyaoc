@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
             
         >
             {/* Maroon top accent */}
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-[#8B1A1A]" />
+            <div className="absolute top-0 left-0 w-full h-0.5 bg-[#8B1A1A]" />
 
             <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-14">
 
@@ -68,12 +68,12 @@ const Navbar: React.FC = () => {
                 {/* Mobile hamburger */}
                 <button
                     onClick={() => setMenuOpen((prev) => !prev)}
-                    className="sm:hidden flex flex-col gap-[5px] justify-center items-center w-8 h-8 cursor-pointer"
+                    className="sm:hidden flex flex-col gap-1.25 justify-center items-center w-8 h-8 cursor-pointer"
                     aria-label="Toggle menu"
                 >
-                    <span className={`block w-5 h-[2px] bg-white/60 rounded transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-                    <span className={`block w-5 h-[2px] bg-white/60 rounded transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />
-                    <span className={`block w-5 h-[2px] bg-white/60 rounded transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+                    <span className={`block w-5 h-0.5 bg-white/60 rounded transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-1.75" : ""}`} />
+                    <span className={`block w-5 h-0.5 bg-white/60 rounded transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />
+                    <span className={`block w-5 h-0.5 bg-white/60 rounded transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-1.75" : ""}`} />
                 </button>
             </div>
 

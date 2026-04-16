@@ -4,7 +4,7 @@
 - [x] Authentication Page (keep track of every signed up user)
   - [ ] Separate between Admin Access & Student Access
 - [ ] Search Page
-  - [x] Scrape agent for gaining access to all faculty per department
+  - [] Scrape agent for gaining access to all faculty per department
   - [ ] Search feature to go through specific professors
   - [ ] (Later) Search feature to go through specific classes
     - [ ] Per selected class, show grade distribution [A, B, C, D, F]
