@@ -27,8 +27,8 @@ const Navbar: React.FC = () => {
     return (
         <nav
         // border-b border-white/8
-            className="fixed top-0 left-0 w-full z-50"
-            // style={{ backgroundColor: "rgb(28, 48, 89)" }}
+            className="border-b border-white/8 fixed top-0 left-0 w-full z-50"
+            style={{ backgroundColor: "rgb(28, 48, 89)" }}
             
         >
             {/* Maroon top accent */}

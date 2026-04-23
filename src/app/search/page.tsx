@@ -9,11 +9,13 @@ import rateMyProfessor from "@/app/search/rateMyProfessor";
 import { TeacherRatings } from "rate-my-professor-api-ts";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import redis from "@/utils/redis/redisConfig";
 
 interface Professor {
     department: string,
-    professor_name: string,
-    email: string
+    office: string,
+    professor: string,
+    title: string,
 }
 
 const Search: React.FC = () => {
@@ -44,9 +46,8 @@ const Search: React.FC = () => {
             }
         })
 
-        const setProfessors = async () => {
-            try {
-                setProfessorList([
+        /*
+        setProfessorList([
                     // {
                     //     department: "type shit",
                     //     professor_name: "shit",
@@ -60,14 +61,31 @@ const Search: React.FC = () => {
                     {
                         department: "history",
                         professor_name: "Brent Riffel",
-                        email: "shi"
                     },
                     {
                         department: "mathematics",
                         professor_name: "Kelly Aceves",
-                        email: ""
                     }
                 ])
+        */
+
+        const setProfessors = async () => {
+            const cachedFaculty: Professor[] | null = await redis.get("faculty");
+            try {
+                if (cachedFaculty) {
+                    setProfessorList(cachedFaculty);
+                    console.log("Used cached value");
+                }
+                else {
+                    const response = await fetch("http://localhost:8080/faculty");
+                    const result = response.json()
+
+                    await redis.set("faculty", result);
+                    setProfessorList(await result);
+                    console.log("prfoessor name" + professorList[0].professor);
+
+                    console.log("sent request to api")
+                }
             }
             catch (error: unknown) {
                 if (error instanceof Error) {
@@ -137,7 +155,7 @@ const Search: React.FC = () => {
                 console.log("department: ", professorList[i].department)
                 result.push({
                     value: professorList[i].department,
-                    label: professorList[i].professor_name
+                    label: professorList[i].professor
                 });
             }      
             
@@ -146,34 +164,12 @@ const Search: React.FC = () => {
         [professorList]
     );
 
-    // const professor_name_list = useMemo(() => 
-    //     professorList.map(prof => ({
-    //         value: prof.department,
-    //         label: prof.professor_name
-    //     })), [professorList]);   
-    /*
-    interface object with department, professor
-    useEffect(() => {
-        axios.get("")
-        .then(response => {
-            setProfessorList(() => (
-                // ...prev,
-                response.data
-            ))
-        })
-        .catch(error => {
-            console.error(error);
-            alert(error.message);
-        })
-    }, []);
-    */
-
     // from professor, retrieve RMP + AOC ratemy from firestore
     //
     return (
         (userEmailTeam) ? (
         <>
-            <div>
+            <div className="mt-20 justify-center align-center">
                 <p>Pick a professor...</p>
                 <Select className="text-black" options={new_professor_name_list} onChange={setSelectedOption} defaultValue={selectedOption} />
                 {/* from db, get metrics regarding professor (calculate averages, etc) 
