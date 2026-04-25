@@ -13,8 +13,8 @@ const Navbar: React.FC = () => {
         { label: "About",     path: "/about" },
         { label: "Rate",      path: "/rate" },
         { label: "Search",    path: "/search" },
-        { label: "Catalog",   path: "" },
-        { label: "Scheduler", path: "" },
+        // { label: "Catalog",   path: "" },
+        // { label: "Scheduler", path: "" },
         { label: "Login",     path: "/login" },
         { label: "Logout", path: "/logout"}
     ];
