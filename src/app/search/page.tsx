@@ -1,203 +1,3 @@
-// "use client";
-
-// import React, { useEffect, useMemo, useState } from "react";
-// import { collection, DocumentData, getDocs, query, where } from "firebase/firestore";
-// import { auth, firestore } from "@/utils/firebase/firebaseConfig";
-// import Select from "react-select";
-
-// import rateMyProfessor from "@/app/search/rateMyProfessor";
-// import { TeacherRatings } from "rate-my-professor-api-ts";
-// import { onAuthStateChanged } from "firebase/auth";
-// import { useRouter } from "next/navigation";
-// import redis from "@/utils/redis/redisConfig";
-
-// import { Professor } from "@/utils/types/types";
-
-// const Search: React.FC = () => {
-//     const [professorList, setProfessorList] = useState<Professor[]>([]);
-//     const [selectedOption, setSelectedOption] = useState<{value: string, label: string} | null>(null);
-
-//     // implement redis caching for rmp reviews on same prof
-//     const [rmpReviews, setRmpReviews] = useState<TeacherRatings[]>();
-
-//     const [fetchRating, setFetchRating] = useState<{id: string, data: DocumentData}[] | null>(null);
-//     const db = firestore;
-
-//     const collectionName = "data";
-
-//     const [userEmailTeam, setUserEmailTeam] = useState<boolean>(false);
-//     const router = useRouter();
-
-//     // TODO: boutta be a hella inefficient algo but whtevr ill fix it later
-    
-//     useEffect(() => {
-//         onAuthStateChanged(auth, (user) => {
-//             if (user?.email === "99066493@my.hartdistrict.org") {
-//                 setUserEmailTeam(true);
-//             }
-//         })
-
-//         const setProfessors = async () => {
-//             const cachedFaculty: Professor[] | null = await redis.get("faculty");
-//             try {
-//                 if (cachedFaculty) {
-//                     setProfessorList(cachedFaculty);
-//                 }
-//                 else {
-//                     console.log("sent request to api");
-
-//                     const response = await fetch("http://localhost:8080/faculty");
-//                     const result = response.json();
-
-//                     await redis.set("faculty", result);
-//                     setProfessorList(await result);
-//                     console.log("prfoessor name" + professorList[0].professor);
-//                 }
-//             }
-//             catch (error: unknown) {
-//                 if (error instanceof Error) {
-//                     console.log(error?.message);
-//                 }
-//                 else {
-//                     console.log("Unexpected Error: \n", error);
-//                 }
-//             }            
-//         }
-
-//         const fetchDocument = async () => {
-//                 try {
-//                     if (selectedOption != null && userEmailTeam) {
-//                         const profDocQuery = query(collection(db, collectionName), where("professorName", "==", selectedOption.label));
-//                         const profDocs = await getDocs(profDocQuery);
-//                         console.log(profDocs);
-
-//                         if (!profDocs.empty) {
-//                             const allData = profDocs.docs.map(doc => ({
-//                                 id: doc.id,
-//                                 data: doc.data()
-//                             }))
-
-//                             console.log("ALL DATA => ", allData);
-
-//                             setFetchRating(allData);
-//                         }
-//                     }
-
-//                     else {
-//                         setFetchRating(null);
-//                     }
-                    
-//                 } catch (error) {
-//                     console.error("Error fetching document: ", error);
-//                 }
-//         }
-
-//         const setRateMyProfReviews = async () => {
-//             try {
-//                 setRmpReviews(await rateMyProfessor(selectedOption?.label));
-//             }
-//             catch (error) {
-//                 console.error("Error fetchign reviews: ", error);
-//             }
-//         }
-
-//         const setAllData = async () => {
-//             await setProfessors();
-//             await fetchDocument();
-
-//             if (selectedOption) {
-//                 await setRateMyProfReviews();
-//             }
-//         }
-
-//         setAllData();
-
-//     }, [selectedOption, db]);
-    
-//     const new_professor_name_list = useMemo(
-//         () => {
-//             const result = [];
-//             for (let i = 0; i < professorList.length; i++) {
-//                 result.push({
-//                     value: professorList[i].department,
-//                     label: professorList[i].professor
-//                 });
-//             }      
-            
-//             return result;
-//         },
-//         [professorList]
-//     );
-
-//     // from professor, retrieve RMP + AOC ratemy from firestore
-
-//     return (
-//         (userEmailTeam) ? (
-//         <>
-//             <div className="mt-20 justify-center align-center">
-//                 <p>Pick a professor...</p>
-//                 <Select className="text-black" options={new_professor_name_list} onChange={setSelectedOption} defaultValue={selectedOption} />
-//                 {/* from db, get metrics regarding professor (calculate averages, etc) 
-//                 , reviews, etc with rmp tab and AOC tab, if no ratemy exists, redirect to login page if they want to make rating */}
-
-//                     Generate Professor Ratings
-
-//                     {
-//                         (selectedOption!==null) ? (
-//                             <>
-//                                 <>
-//                                     {(fetchRating && fetchRating.length > 0) ? (
-//                                             fetchRating.map((doc) => (
-//                                                 <div key={doc.id}>
-//                                                     <p>Review from {doc.data.name}</p>
-//                                                     <p>Rating: {doc.data.rating}</p>
-//                                                     <p>Review: {doc.data.review}</p>
-//                                                 </div>
-//                                             ))
-//                                     ) : (
-//                                         <>
-//                                             <p>No ratemyaoc reviews for this professor</p>
-//                                         </>
-//                                     )}
-//                                 </>
-//                             </>
-//                         ) : (
-//                             <>
-//                             </>
-//                         )
-//                     }
-
-//                     {
-//                         (rmpReviews !== null) ? (
-//                             <>
-//                                 <div>
-//                                     <p>RMP REVIEW</p>
-//                                     {
-//                                         <p>{rmpReviews?.[1]?.comment}</p>
-//                                     }
-//                                 </div>
-//                             </>
-//                         ) : (
-//                             <></>
-//                         )
-//                     }
-//             </div>
-//         </>
-//         ) : 
-//         (
-//             <>
-//                 <div>
-//                     <p>Page currently under construction</p>
-//                     <p>Please revisit some other time</p>
-//                     <button className="hover:cursor-pointer bg-amber-600" onClick={() => router.push("/")} >Navigate back to home page</button>
-//                 </div>
-//             </>
-//         )
-//     )
-// }
-
-// export default Search;
-
 "use client";
 
 import React, { useEffect, useMemo, useState, useRef } from "react";
@@ -345,23 +145,23 @@ const RMPReviewCard = ({ review }: { review: TeacherRatings }) => (
         <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex flex-col gap-0.5">
                 <span className="text-sm font-bold text-white/70">RateMyProfessors Review</span>
-                <span className="text-[11px] text-white/25">{(review as any).class || ""}</span>
+                <span className="text-[11px] text-white/25">{review?.class || ""}</span>
             </div>
             <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase border border-[#8B1A1A]/40 text-[#8B1A1A] bg-[#8B1A1A]/10">
                 RMP
             </span>
         </div>
         <div className="flex gap-4">
-            {(review as any).rating !== undefined && (
+            {review.clarity_rating !== undefined && (
                 <div className="flex flex-col gap-0.5">
                     <span className="text-[10px] text-white/30 uppercase tracking-widest">Rating</span>
-                    <span className="text-lg font-black text-white/70">{(review as any).rating}<span className="text-white/25 text-sm font-normal">/5</span></span>
+                    <span className="text-lg font-black text-white/70">{review.clarity_rating}<span className="text-white/25 text-sm font-normal">/5</span></span>
                 </div>
             )}
-            {(review as any).difficulty !== undefined && (
+            {review.difficulty_rating !== undefined && (
                 <div className="flex flex-col gap-0.5">
                     <span className="text-[10px] text-white/30 uppercase tracking-widest">Difficulty</span>
-                    <span className="text-lg font-black text-white/70">{(review as any).difficulty}<span className="text-white/25 text-sm font-normal">/5</span></span>
+                    <span className="text-lg font-black text-white/70">{review.difficulty_rating}<span className="text-white/25 text-sm font-normal">/5</span></span>
                 </div>
             )}
         </div>
@@ -385,7 +185,7 @@ const Search: React.FC = () => {
 
     const collectionName = "data";
 
-    const [userEmailTeam, setUserEmailTeam] = useState<boolean>(false);
+    const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
     const router = useRouter();
 
     const [visibleAOC, setVisibleAOC] = useState<number>(REVIEWS_PER_PAGE);
@@ -395,8 +195,8 @@ const Search: React.FC = () => {
     
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            if (user?.email === "99066493@my.hartdistrict.org") {
-                setUserEmailTeam(true);
+            if (user) {
+                setUserLoggedIn(true);
             }
         })
 
@@ -429,7 +229,7 @@ const Search: React.FC = () => {
 
         const fetchDocument = async () => {
                 try {
-                    if (selectedOption != null && userEmailTeam) {
+                    if (selectedOption != null && userLoggedIn) {
                         const profDocQuery = query(collection(db, collectionName), where("professorName", "==", selectedOption.label));
                         const profDocs = await getDocs(profDocQuery);
                         console.log(profDocs);
@@ -496,11 +296,11 @@ const Search: React.FC = () => {
 
     const stats = useMemo(() => {
         const aocRatings = (fetchRating ?? []).map(d => d.data.rating).filter(r => r > 0);
-        const rmpRatings = (rmpReviews ?? []).map(r => (r as any).rating).filter((r): r is number => typeof r === "number");
+        const rmpRatings = (rmpReviews ?? []).map(r => r.clarity_rating).filter((r): r is number => typeof r === "number");
         const allRatings = [...aocRatings, ...rmpRatings];
 
         const aocDiff = (fetchRating ?? []).map(d => d.data.difficulty).filter(r => r > 0);
-        const rmpDiff = (rmpReviews ?? []).map(r => (r as any).difficulty).filter((r): r is number => typeof r === "number");
+        const rmpDiff = (rmpReviews ?? []).map(r => r.difficulty_rating).filter((r): r is number => typeof r === "number");
         const allDiff = [...aocDiff, ...rmpDiff];
 
         const wouldTakeCount = (fetchRating ?? []).filter(d => d.data.wouldTake === "yes").length;
@@ -517,7 +317,7 @@ const Search: React.FC = () => {
     const professorSelected = selectedOption !== null;
 
     return (
-        userEmailTeam ? (
+        userLoggedIn ? (
             <div
                 className="min-h-screen px-4 py-12 flex flex-col items-center"
                 style={{ backgroundColor: "rgb(28, 48, 89)" }}
