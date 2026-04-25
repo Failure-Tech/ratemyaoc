@@ -74,7 +74,7 @@ const Search: React.FC = () => {
             try {
                 if (cachedFaculty) {
                     setProfessorList(cachedFaculty);
-                    console.log("Used cached value");
+                    // console.log("Used cached value");
                 }
                 else {
                     const response = await fetch("http://localhost:8080/faculty");
@@ -99,7 +99,7 @@ const Search: React.FC = () => {
 
         const fetchDocument = async () => {
                 try {
-                    if (selectedOption != null) {
+                    if (selectedOption != null && userEmailTeam) {
                         const profDocQuery = query(collection(db, collectionName), where("professorName", "==", selectedOption.label));
                         const profDocs = await getDocs(profDocQuery);
 
