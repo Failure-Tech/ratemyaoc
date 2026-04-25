@@ -14,6 +14,7 @@
   - [ ] Import from COC's API directly with easy search features
     - [ ] Filters: Course, Semester, Date (M/W vs T/TH)
     - [ ] Pull up similar data to display over tabs (Overview, Ratings, Grade)
+- [ ] Change Firebase security rules
   
 ### Tech Stack
 - Frontend: Tailwind, Next, UI Plugins
