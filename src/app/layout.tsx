@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "RateMyAOC",
   description: "A tool to help AOC students and teachers alike",
+  icons: "./aoc_assets/school_logo.svg"
 };
 
 export default function RootLayout({
