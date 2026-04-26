@@ -329,6 +329,8 @@ const Rate: React.FC = () => {
                                         <option value="sophomore">Class of 2028</option>
                                         <option value="junior">Class of 2027</option>
                                         <option value="senior">Class of 2026</option>
+                                        <option value="graduated">Class of 2025</option>
+                                        <option value="graduated">Class of 2024</option>
                                     </select>
                                     <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/30 text-xs">
                                         ▾
